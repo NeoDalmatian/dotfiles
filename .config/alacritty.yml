@@ -1,0 +1,29 @@
+# ~/.config/alacritty.yml
+
+# Font configuration
+font:
+  size: 9.0
+  offset:
+    x: 0
+    y: 0
+  family: Monospace
+
+# Colors
+colors:
+  primary:
+    background: '0x1d2021'
+    foreground: '0xc5c8c6'
+
+window:      
+ opacity: 0.9
+ decorations: none
+ padding:
+   x: 8
+   y: 6
+
+mouse:
+  hide_when_typing: true
+
+cursor:
+  style: Underline
+  unfocused_hollow: false
