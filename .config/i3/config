@@ -193,6 +193,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
+#colors
 set $bg-color 	         #303030
 set $inactive-bg-color   #222222
 set $text-color          #f3f4f5
@@ -210,7 +211,10 @@ hide_edge_borders both
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
+# Main monitor (eDp-1) - everything, slightly larger font
 bar {
+	font pango:System San Francisco Display 14
+	output eDP-1
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
        	colors {
 		background #222222
@@ -222,13 +226,26 @@ bar {
 	}
 }
 
-#-----------------------------------------------==| CUSTOM SETTINGS |==---------------------------------------------------#
+# Big monitor (HDMI-1-1) - empty
+bar {
+	output HDMI-1-1
+        status_command i3blocks -c ~/.config/i3/i3blocks-HDMI.conf
+       	colors {
+		background #222222
+    		separator #757575
+		#                  border             background         text
+		focused_workspace  $bg-color          $bg-color          $text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+	}
+}
+#-----------------------------==| CUSTOM SETTINGS |==------------------------------#
 
 #dual monitor setup using Arandr (cat saved file and copy it here) // sleep 2 becouse refreshing fixes black screen on laptop
 #main monitor is eDP-1 (laptop monitor)
-#exec --no-startup-id sleep 2 && xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
+#exec --no-startup-id sleep 1 && xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
 #main monitor is HDMI-1-1 (second monitor)
-exec --no-startup-id sleep 2 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
+exec --no-startup-id sleep 1 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
 
 #open google-chrome
 bindsym $mod+c exec --no-startup-id google-chrome-stable
@@ -248,17 +265,21 @@ exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
 
 #background wallpaper (wait 2 sec because of bugs)
-exec --no-startup-id sleep 2 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro.jpg
+exec --no-startup-id sleep 1 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro.jpg
 
 #transparency
 #picom --experimental-backends for blurring (newer fork from compton)
 exec --no-startup-id picom --experimental-backends 
 #exec --no-startup-id compton (older version, doesnt allow blurring)
 
-#gaps (for this version you have to install i3gaps)
-gaps inner 12
+#gaps (for this i3 version you have to install i3gaps)
+gaps inner 14
 gaps outer 7
 smart_gaps on
 
 #layout CAN'T SAVE AND DISPLAY BASH SCRIPTS IN TERMINALS?
 #exec --no-startup-id "i3-msg 'workspace 1; append_layout ~/.config/i3/workspace_1.json'"
+
+#removing window frames
+default_border pixel 1
+default_floating_border pixel 1
