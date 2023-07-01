@@ -44,7 +44,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
-# start a termina (alacritty with scaling of 1.5)
+# start a terminal (alacritty with scaling of 1.5)
 	bindsym $mod+Return exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.5 alacritty
 
 #i3-sensible-terminal <--- instead above command after exec (this is default)
@@ -53,7 +53,8 @@ floating_modifier $mod
 bindsym $mod+q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec rofi -show run -lines 3 -eh 2 -width 100 -padding 800 -opacity "85" -bw 0 -bc "$bg-color" -bg "$bg-color" -fg "$text-color" -hlbg "$bg-color" -hlfg "#9575cd" -font "System San Francisco Display 14"
+#
+#bindsym $mod+d exec dmenu_run
 # A more modern dmenu replacement is rofi:
  bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -61,10 +62,10 @@ bindsym $mod+q kill
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ccaron focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -73,10 +74,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+ccaron move right
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -85,10 +86,13 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+#bindsym $mod+h split h
 
 # split in vertical orientation
-bindsym $mod+v split v
+#bindsym $mod+v split v
+
+# split toggle
+bindsym $mod+y split toggle
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -215,7 +219,8 @@ hide_edge_borders both
 bar {
 	font pango:System San Francisco Display 14
 	output eDP-1
-        status_command i3blocks -c ~/.config/i3/i3blocks.conf
+	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-alt.conf
+        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
        	colors {
 		background #222222
     		separator #757575
@@ -229,7 +234,8 @@ bar {
 # Big monitor (HDMI-1-1) - empty
 bar {
 	output HDMI-1-1
-        status_command i3blocks -c ~/.config/i3/i3blocks-HDMI.conf
+	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-HDMI-alt.conf
+        status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-HDMI.conf
        	colors {
 		background #222222
     		separator #757575
@@ -243,9 +249,9 @@ bar {
 
 #dual monitor setup using Arandr (cat saved file and copy it here) // sleep 2 becouse refreshing fixes black screen on laptop
 #main monitor is eDP-1 (laptop monitor)
-#exec --no-startup-id sleep 1 && xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
+exec --no-startup-id sleep 1 && xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
 #main monitor is HDMI-1-1 (second monitor)
-exec --no-startup-id sleep 1 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
+#exec --no-startup-id sleep 1 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
 
 #open google-chrome
 bindsym $mod+c exec --no-startup-id google-chrome-stable
@@ -265,7 +271,7 @@ exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
 
 #background wallpaper (wait 2 sec because of bugs)
-exec --no-startup-id sleep 1 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro.jpg
+exec --no-startup-id sleep 2 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro.jpg
 
 #transparency
 #picom --experimental-backends for blurring (newer fork from compton)
