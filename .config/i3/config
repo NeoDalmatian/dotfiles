@@ -289,3 +289,6 @@ smart_gaps on
 #removing window frames
 default_border pixel 1
 default_floating_border pixel 1
+
+#dunst (notification daemon)
+#exec --no-startup-id
