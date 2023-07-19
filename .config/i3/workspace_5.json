@@ -1,0 +1,82 @@
+{
+    "border": "none",
+    "current_border_width": 1,
+    "floating": "auto_off",
+    "geometry": {
+       "height": 1010,
+       "width": 744,
+       "x": 1940,
+       "y": 20
+    },
+    "marks": [],
+    "name": "script.js - etch-a-sketch-2 - Visual Studio Code",
+    "percent": 0.53,
+    "swallows": [
+       {
+       "class": "^Code$",
+       "instance": "^code$",
+       "machine": "^NeoDalmatian$",
+       "title": "^script\\.js\\ \\-\\ etch\\-a\\-sketch\\-2\\ \\-\\ Visual\\ Studio\\ Code$",
+       "window_role": "^browser\\-window$"
+       }
+    ],
+    "type": "con"
+}
+
+{
+    "border": "pixel",
+    "floating": "auto_off",
+    "layout": "splitv",
+    "marks": [],
+    "percent": 0.47,
+    "type": "con",
+    "nodes": [
+        {
+            "border": "none",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 600,
+               "width": 800,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "Alacritty",
+            "percent": 0.53,
+            "swallows": [
+               {
+               "class": "^Alacritty$",
+               "instance": "^Alacritty$",
+               "machine": "^NeoDalmatian$",
+               "title": "^Alacritty$"
+               }
+            ],
+            "type": "con"
+        },
+        {
+            "border": "none",
+            "current_border_width": 1,
+            "floating": "auto_off",
+            "geometry": {
+               "height": 600,
+               "width": 800,
+               "x": 0,
+               "y": 0
+            },
+            "marks": [],
+            "name": "Alacritty",
+            "percent": 0.47,
+            "swallows": [
+               {
+               "class": "^Alacritty$",
+               "instance": "^Alacritty$",
+               "machine": "^NeoDalmatian$",
+               "title": "^Alacritty$"
+               }
+            ],
+            "type": "con"
+        }
+    ]
+}
+
