@@ -259,7 +259,7 @@ bindsym $mod+c exec --no-startup-id google-chrome-stable
 #interactive screenshot by pressing printscreen
 bindsym Print exec --no-startup-id gnome-screenshot -i
 
-#calculator by pressing f12
+#calculator by pressing fn+f12
 bindsym XF86Calculator exec --no-startup-id gnome-calculator
 
 #brightness constol
@@ -285,6 +285,15 @@ smart_gaps on
 #Tried making smart_gaps only for Chrome but gap commands dont work with for_window command
 #for_window [class="Google-chrome"] 
 
+#i3-save-tree --workspace N > ~/.config/i3/workspace_N.json (Save the current window layout of a single workspace, where N is the number of the preferred workspace. This will save the current layout of workspace N to the file)
+
+#sed -i 's|^\(\s*\)// "|\1"|g; /^\s*\/\//d' ~/.config/i3/workspace_N.json (edit newly created file)
+
+#vim load_layout.sh > 
+##!/bin/sh
+#i3-msg "workspace M; append_layout ~/.config/i3/workspace_N.json" 
+#(Restore the window layout of the workspace)
+
 #layout for coding
 bindsym $mod+x exec --no-startup-id ~/.config/i3/load_layout_5.sh
 
@@ -295,5 +304,8 @@ exec --no-startup-id sleep 3 && ~/.config/i3/load_layout_2.sh
 default_border pixel 1
 default_floating_border pixel 1
 
-#dunst (notification daemon)
+#dunst (notification daemon) doesnt work for now
 #exec --no-startup-id
+
+#open google-chrome on workspace 6 on startup
+exec --no-startup-id sleep 3.5 && i3-msg "workspace 6; exec --no-startup-id google-chrome-stable"
