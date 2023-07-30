@@ -47,7 +47,7 @@ floating_modifier $mod
 # start a terminal (alacritty with scaling of 1.5)
 	bindsym $mod+Return exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.5 alacritty
 
-#i3-sensible-terminal <--- instead above command after exec (this is default)
+# i3-sensible-terminal <--- instead above command after exec (this is default)
 
 # kill focused window
 bindsym $mod+shift+q kill
@@ -111,6 +111,9 @@ bindsym $mod+space focus mode_toggle
 # focus the parent container
 bindsym $mod+a focus parent
 
+# kill the parent container (workspace)
+bindsym $mod+Shift+a focus parent kill
+
 # focus the child container
 #bindsym $mod+d focus child
 
@@ -151,7 +154,7 @@ bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 
-#assign diferent workspaces to diferent screens
+# assign diferent workspaces to diferent screens
 workspace 1 output eDP-1
 workspace 2 output eDP-1
 workspace 3 output eDP-1
@@ -197,19 +200,21 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-#colors
-set $bg-color 	         #303030
-set $inactive-bg-color   #222222
-set $text-color          #f3f4f5
-set $inactive-text-color #bdbdbd
-set $urgent-bg-color     #E53935
+# color variables
+set $bg-color 	         	  #303030
+set $inactive-bg-color   	  #222222
+set $text-color          	  #f3f4f5
+set $inactive-text-color 	  #bdbdbd
+set $urgent-bg-color     	  #E53935
+set $gr-text-color 	          #c4b796
+set $gr-inactive-text-color	  #ab9f82
 
 # window colors
-#                       border              background         text                 indicator
-client.focused          $bg-color           $bg-color          $text-color          $bg-color
-client.unfocused        $inactive-bg-color  $inactive-bg-color $inactive-text-color $inactive-bg-color
-client.focused_inactive $inactive-bg-color  $inactive-bg-color $inactive-text-color $inactive-bg-color
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $urgent-bg-color
+#                       border              background         text                    indicator
+client.focused          $bg-color           $bg-color          $gr-text-color          $bg-color
+client.unfocused        $inactive-bg-color  $inactive-bg-color $gr-inactive-text-color $inactive-bg-color
+client.focused_inactive $inactive-bg-color  $inactive-bg-color $gr-inactive-text-color $inactive-bg-color
+client.urgent           $urgent-bg-color    $urgent-bg-color   $gr-text-color          $urgent-bg-color
 
 hide_edge_borders both
 
@@ -217,6 +222,7 @@ hide_edge_borders both
 # finds out, if available)
 # Main monitor (eDp-1) - everything, slightly larger font
 bar {
+	tray_output eDP-1
 	font pango:System San Francisco Display 14
 	output eDP-1
 	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-alt.conf
@@ -225,14 +231,17 @@ bar {
 		background #222222
     		separator #757575
 		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+		focused_workspace  $bg-color          $bg-color          $gr-text-color
+		active_workspace   $bg-color	      $bg-color		 $gr-text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $gr-inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $gr-text-color
 	}
 }
 
 # Big monitor (HDMI-1-1) - empty
 bar {
+	tray_output none
+	font pango:System San Francisco Display 11
 	output HDMI-1-1
 	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-HDMI-alt.conf
         status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-HDMI.conf
@@ -240,72 +249,74 @@ bar {
 		background #222222
     		separator #757575
 		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
+		focused_workspace  $bg-color          $bg-color          $gr-text-color
+		active_workspace   $bg-color	      $bg-color		 $gr-text-color
+		inactive_workspace $inactive-bg-color $inactive-bg-color $gr-inactive-text-color
+		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $gr-text-color
 	}
 }
 #-----------------------------==| CUSTOM SETTINGS |==------------------------------#
 
-#dual monitor setup using Arandr (cat saved file and copy it here) // sleep 2 becouse refreshing fixes black screen on laptop
-#main monitor is eDP-1 (laptop monitor)
+# dual monitor setup using Arandr (cat saved file and copy it here) // sleep 2 becouse refreshing fixes black screen on laptop
+# main monitor is eDP-1 (laptop monitor)
 exec --no-startup-id sleep 1 && xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
-#main monitor is HDMI-1-1 (second monitor)
+# main monitor is HDMI-1-1 (second monitor)
 #exec --no-startup-id sleep 1 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
 
-#open google-chrome
+# open google-chrome
 bindsym $mod+c exec --no-startup-id google-chrome-stable
 
-#interactive screenshot by pressing printscreen
+# interactive screenshot by pressing printscreen
 bindsym Print exec --no-startup-id gnome-screenshot -i
 
-#calculator by pressing fn+f12
+# calculator by pressing fn+f12
 bindsym XF86Calculator exec --no-startup-id gnome-calculator
 
-#brightness constol
+# brightness constol
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl --quiet set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl --quiet set 5%-
 
-#disable screen saver
+# disable screen saver
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
 
-#background wallpaper (wait 2 sec because of bugs)
+# background wallpaper (wait 2 sec because of bugs)
 exec --no-startup-id sleep 2 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro.jpg
 
-#transparency
-#picom --experimental-backends for blurring (newer fork from compton)
+# transparency
+# picom --experimental-backends for blurring (newer fork from compton)
 exec --no-startup-id picom --experimental-backends 
-#exec --no-startup-id compton (older version, doesnt allow blurring)
+# exec --no-startup-id compton (older version, doesnt allow blurring)
 
-#gaps (for this i3 version you have to install i3gaps)
+# gaps (for this i3 version you have to install i3gaps)
 gaps inner 14
 gaps outer 7
-smart_gaps on
-#Tried making smart_gaps only for Chrome but gap commands dont work with for_window command
-#for_window [class="Google-chrome"] 
+#smart_gaps on
+# this option is so only google chrome (Ws6) is fully opened and other programs have outer gap when fully opened
+workspace 6 gaps outer 0
+workspace 6 gaps inner 0
 
-#i3-save-tree --workspace N > ~/.config/i3/workspace_N.json (Save the current window layout of a single workspace, where N is the number of the preferred workspace. This will save the current layout of workspace N to the file)
+# i3-save-tree --workspace N > ~/.config/i3/workspace_N.json (Save the current window layout of a single workspace, where N is the number of the preferred workspace. This will save the current layout of workspace N to the file)
 
-#sed -i 's|^\(\s*\)// "|\1"|g; /^\s*\/\//d' ~/.config/i3/workspace_N.json (edit newly created file)
+# sed -i 's|^\(\s*\)// "|\1"|g; /^\s*\/\//d' ~/.config/i3/workspace_N.json (edit newly created file)
 
-#vim load_layout.sh > 
-##!/bin/sh
-#i3-msg "workspace M; append_layout ~/.config/i3/workspace_N.json" 
-#(Restore the window layout of the workspace)
+# vim load_layout.sh
+# #!/bin/sh
+# i3-msg "workspace M; append_layout ~/.config/i3/workspace_N.json"
+# (Restore the window layout of the workspace)
 
-#layout for coding
+# layout for coding
 bindsym $mod+x exec --no-startup-id ~/.config/i3/load_layout_5.sh
 
-#startup layout
+# startup layout
 exec --no-startup-id sleep 3 && ~/.config/i3/load_layout_2.sh
 
-#removing window frames
+# removing window frames
 default_border pixel 1
 default_floating_border pixel 1
 
-#dunst (notification daemon) doesnt work for now
+# dunst (notification daemon) doesnt work for now
 #exec --no-startup-id
 
-#open google-chrome on workspace 6 on startup
+# open google-chrome on workspace 6 on startup
 exec --no-startup-id sleep 3.5 && i3-msg "workspace 6; exec --no-startup-id google-chrome-stable"
