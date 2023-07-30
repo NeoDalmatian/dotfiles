@@ -9,13 +9,13 @@ font:
   family: Monospace
 
 # Colors
-colors:
-  primary:
-    background: '0x1d2021'
-    foreground: '0xc5c8c6'
+#colors:
+#  primary:
+#    background: '0x1d2021'
+#    foreground: '0xc5c8c6'
 
 window:      
- opacity: 0.9
+ opacity: 0.96
  decorations: none
  padding:
    x: 8
@@ -28,3 +28,6 @@ cursor:
   style: Underline
   unfocused_hollow: false
 
+# Theme
+import:
+ - ~/.config/alacritty/themes/themes/gruvbox_dark.yaml
