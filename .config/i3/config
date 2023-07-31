@@ -320,3 +320,6 @@ default_floating_border pixel 1
 
 # open google-chrome on workspace 6 on startup
 exec --no-startup-id sleep 3.5 && i3-msg "workspace 6; exec --no-startup-id google-chrome-stable"
+
+#calendar bug fix
+for_window [class="Yad"] floating enable
