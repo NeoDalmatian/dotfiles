@@ -16,7 +16,7 @@
     fg2:    #DEDEDE80;
 
     background-color:   transparent;
-    text-color:         @fg0;
+    text-color:         #C7BCA1;
 
     margin:     0;
     padding:    0;

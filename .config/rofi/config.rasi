@@ -5,14 +5,6 @@ configuration {
 	font: "System San Francisco Display 16";
 	modi: "Window, run, drun";
 	show-icons: true;
-	icon-themes: "Yaru-prussiangreen-dark";
 }
 
-//@theme "/usr/share/rofi/themes/android_notification.rasi"
-
-//@theme "/usr/share/rofi/themes/spotlight-dark.rasi"
-//@theme "/usr/share/rofi/themes/rounded-gray-dark.rasi"
-//@theme "/usr/share/rofi/themes/spotlight-dark.rasi"
-//@theme "/usr/share/rofi/themes/gruvbox-dark-hard.rasi"
-//@theme "/usr/share/rofi/themes/Monokai.rasi"
-@theme "/usr/share/rofi/themes/spotlight-dark.rasi"
+@theme "/home/antonio/.config/rofi/themes/spotlight-dark.rasi"
