@@ -46,8 +46,7 @@ floating_modifier $mod
 
 # start a terminal (alacritty with scaling of 1.5)
 	bindsym $mod+Return exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.5 alacritty
-
-# i3-sensible-terminal <--- instead above command after exec (this is default)
+#	bindsym $mod+Return exec --no-startup-id i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+shift+q kill
@@ -171,7 +170,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec --no-startup-id "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -205,9 +204,10 @@ set $bg-color 	         	  #303030
 set $inactive-bg-color   	  #222222
 set $text-color          	  #f3f4f5
 set $inactive-text-color 	  #bdbdbd
-set $urgent-bg-color     	  #E53935
+set $urgent-color 	    	  #E53935
 set $gr-text-color 	          #c4b796
 set $gr-inactive-text-color	  #ab9f82
+set $binding-mode-color           #303030
 
 # window colors
 #                       border              background         text                    indicator
@@ -230,11 +230,13 @@ bar {
        	colors {
 		background #222222
     		separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $gr-text-color
-		active_workspace   $bg-color	      $bg-color		 $gr-text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $gr-inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $gr-text-color
+		#                  border                 background         	 text
+		focused_workspace  $bg-color              $bg-color              $gr-text-color
+		active_workspace   $bg-color	          $bg-color		 $gr-text-color
+		inactive_workspace $inactive-bg-color     $inactive-bg-color     $gr-inactive-text-color
+		urgent_workspace   $inactive-bg-color     $inactive-bg-color     $urgent-color
+		binding_mode       $binding-mode-color    $binding-mode-color    $gr-text-color
+		
 	}
 }
 
@@ -248,11 +250,12 @@ bar {
        	colors {
 		background #222222
     		separator #757575
-		#                  border             background         text
-		focused_workspace  $bg-color          $bg-color          $gr-text-color
-		active_workspace   $bg-color	      $bg-color		 $gr-text-color
-		inactive_workspace $inactive-bg-color $inactive-bg-color $gr-inactive-text-color
-		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $gr-text-color
+		#                  border                 background         	 text
+		focused_workspace  $bg-color              $bg-color          	 $gr-text-color
+		active_workspace   $bg-color	          $bg-color		 $gr-text-color
+		inactive_workspace $inactive-bg-color     $inactive-bg-color 	 $gr-inactive-text-color
+		urgent_workspace   $inactive-bg-color     $inactive-bg-color     $urgent-color
+		binding_mode       $binding-mode-color    $binding-mode-color    $gr-text-color
 	}
 }
 #-----------------------------==| CUSTOM SETTINGS |==------------------------------#
@@ -321,5 +324,18 @@ default_floating_border pixel 1
 # open google-chrome on workspace 6 on startup
 exec --no-startup-id sleep 3.5 && i3-msg "workspace 6; exec --no-startup-id google-chrome-stable"
 
-#calendar bug fix
+# calendar bug fix
 for_window [class="Yad"] floating enable
+
+#custom shutdown menu
+mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
+        bindsym $mod+r exec systemctl reboot
+        bindsym $mod+l exit
+        bindsym $mod+p exec systemctl poweroff
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff"
