@@ -7,4 +7,4 @@ configuration {
 	show-icons: true;
 }
 
-@theme "/home/antonio/.config/rofi/themes/spotlight-dark.rasi"
+@theme "/usr/share/rofi/themes/gruvbox-dark.rasi"
