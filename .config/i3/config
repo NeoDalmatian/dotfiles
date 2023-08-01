@@ -288,7 +288,7 @@ exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
 
 # background wallpaper (wait 2 sec because of bugs)
-exec --no-startup-id sleep 2 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro.jpg
+exec --no-startup-id sleep 2 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro-alt.jpg
 
 # transparency
 # picom --experimental-backends for blurring (newer fork from compton)
@@ -331,7 +331,7 @@ exec --no-startup-id sleep 3.5 && i3-msg "workspace 6; exec --no-startup-id goog
 # calendar bug fix
 for_window [class="Yad"] floating enable
 
-#custom shutdown menu
+# custom shutdown menu
 mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
         bindsym $mod+r exec systemctl reboot
         bindsym $mod+l exit
@@ -343,3 +343,6 @@ mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
 }
 
 bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff"
+
+# conky clock below penguin
+exec --no-startup-id sleep 4 && i3-msg "focus output eDP-1, workspace 1" && sleep 1 && conky

@@ -1,0 +1,49 @@
+conky.config = {
+    xinerama_head = 2,
+    alignment = 'bottom_right',
+    background = false,
+    border_width = 10,
+    cpu_avg_samples = 2,
+    default_color = 'black',
+    default_outline_color = 'white',
+    default_shade_color = 'white',
+	default_bar_height = 4,
+    double_buffer = true,
+    draw_borders = false,
+    draw_graph_borders = true,
+    draw_outline = false,
+    draw_shades = false,
+    extra_newline = false,
+    font = 'Prisma:size=12',
+    gap_x =  70,
+    gap_y = 75,
+    minimum_height = 5,
+    minimum_width =  5,
+    net_avg_samples = 2,
+    no_buffers = true,
+    out_to_console = false,
+    out_to_ncurses = false,
+    out_to_stderr = false,
+    out_to_x = true,
+    own_window = true,
+    own_window_type = 'override',
+	own_window_transparent = true,		--set transparency
+	own_window_argb_visual = true,		--use argb visual (controls transparency)
+	own_window_argb_value = 255,		--argb transparency (0-255)
+    show_graph_range = false,
+    show_graph_scale = false,
+    stippled_borders = 0,
+    update_interval = 1.0,
+    uppercase = false,
+    use_spacer = 'none',
+    use_xft = true,
+	short_units=true,					--Short units M instead of Mib
+}
+
+conky.text = [[
+#4f6a3f  Green
+#6da3bb	 Blue
+#cf8a15  Yellow
+#ca171d  Red
+$alignc${color #EADBB2}${font Prisma:Regular:size=110}${time %H:%M} ${font :size=5}
+]]
