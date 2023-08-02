@@ -262,7 +262,7 @@ bar {
 
 # dual monitor setup using Arandr (cat saved file and copy it here) // sleep 2 becouse refreshing fixes black screen on laptop
 # main monitor is eDP-1 (laptop monitor)
-exec --no-startup-id sleep 1 && xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
+exec --no-startup-id sleep 0.5 && xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
 # main monitor is HDMI-1-1 (second monitor)
 #exec --no-startup-id sleep 1 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
 
@@ -288,7 +288,7 @@ exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
 
 # background wallpaper (wait 2 sec because of bugs)
-exec --no-startup-id sleep 2 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro-alt.jpg
+exec --no-startup-id sleep 1 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro-alt.jpg
 
 # transparency
 # picom --experimental-backends for blurring (newer fork from compton)
@@ -316,7 +316,7 @@ workspace 6 gaps inner 0
 bindsym $mod+x exec --no-startup-id ~/.config/i3/load_layout_5.sh
 
 # startup layout
-exec --no-startup-id sleep 3 && ~/.config/i3/load_layout_2.sh
+exec --no-startup-id sleep 1.5 && ~/.config/i3/load_layout_2.sh
 
 # removing window frames
 default_border pixel 1
@@ -326,7 +326,7 @@ default_floating_border pixel 1
 #exec --no-startup-id
 
 # open google-chrome on workspace 6 on startup
-exec --no-startup-id sleep 3.5 && i3-msg "workspace 6; exec --no-startup-id google-chrome-stable"
+exec --no-startup-id sleep 2 && i3-msg "workspace 6; exec --no-startup-id google-chrome-stable"
 
 # calendar bug fix
 for_window [class="Yad"] floating enable
@@ -345,4 +345,4 @@ mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
 bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff"
 
 # conky clock below penguin
-exec --no-startup-id sleep 4 && i3-msg "focus output eDP-1, workspace 1" && sleep 1 && conky
+exec --no-startup-id sleep 3 && i3-msg "focus output eDP-1, workspace 1" && sleep 1 && conky
