@@ -204,7 +204,7 @@ set $bg-color 	         	  #303030
 set $inactive-bg-color   	  #222222
 set $text-color          	  #f3f4f5
 set $inactive-text-color 	  #bdbdbd
-set $urgent-color 	    	  #E53935
+set $urgent-color 	    	  #CC231C
 set $gr-text-color 	          #c4b796
 set $gr-inactive-text-color	  #ab9f82
 set $binding-mode-color           #303030
@@ -345,4 +345,8 @@ mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
 bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff"
 
 # conky clock below penguin
-exec --no-startup-id sleep 3 && i3-msg "focus output eDP-1, workspace 1" && sleep 1 && conky
+assign [class="conky"] workspace 1
+exec --no-startup-id sleep 2.5 && conky
+
+# open window (transparent "empty" window)
+bindsym $mod+m exec --no-startup-id i3-msg open
