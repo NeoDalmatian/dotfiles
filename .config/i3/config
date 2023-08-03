@@ -313,10 +313,10 @@ workspace 6 gaps inner 0
 # (Restore the window layout of the workspace)
 
 # layout for coding
-bindsym $mod+x exec --no-startup-id ~/.config/i3/load_layout_5.sh
+bindsym $mod+x exec --no-startup-id ~/.config/i3/load-layout/load_layout_5.sh
 
 # startup layout
-exec --no-startup-id sleep 1.5 && ~/.config/i3/load_layout_2.sh
+exec --no-startup-id sleep 1.5 && ~/.config/i3/load-layout/load_layout_2.sh
 
 # removing window frames
 default_border pixel 1
