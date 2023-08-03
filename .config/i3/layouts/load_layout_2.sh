@@ -1,5 +1,5 @@
 #!/bin/sh
-i3-msg "workspace 1; append_layout ~/.config/i3/load-layout/workspace_2.json"
+i3-msg "workspace 1; append_layout ~/.config/i3/layouts/workspace_2.json"
 
 sleep 0.1
 
