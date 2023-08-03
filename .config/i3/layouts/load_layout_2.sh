@@ -7,9 +7,9 @@ sleep 0.1
 
 sleep 0.1
 
-(alacritty -e ~/.config/i3/load-layout/keep_open.sh ranger ~/NeoDesktop &)
+(alacritty -e ~/.config/i3/layouts/keep_open.sh ranger ~/NeoDesktop &)
 
 sleep 0.1
 
 # path to vtop executable: $which vtop
-(alacritty -e ~/.config/i3/load-layout/keep_open.sh /home/antonio/.nvm/versions/node/v16.16.0/bin/vtop &)
+(alacritty -e ~/.config/i3/layouts/keep_open.sh /home/antonio/.nvm/versions/node/v16.16.0/bin/vtop &)

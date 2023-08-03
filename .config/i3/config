@@ -307,7 +307,7 @@ bar {
 	}
 }
 
-# second monitor (HDMI-1-1) - empty, slightly smaller font
+# Second monitor (HDMI-1-1) - empty, slightly smaller font
 bar {
 	tray_output none
 	font pango:System San Francisco Display 11
@@ -326,7 +326,7 @@ bar {
 	}
 }
 
-# custom shutdown menu
+# Custom shutdown menu
 mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
 	# Reboot
 	bindsym $mod+r exec systemctl reboot
