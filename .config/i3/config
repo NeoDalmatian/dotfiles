@@ -290,16 +290,16 @@ hide_edge_borders both
 # Main monitor (eDp-1) - everything, slightly larger font
 bar {
 	tray_output eDP-1
-	font pango:System San Francisco Display 14
+	font pango:System San Francisco Display, FontAwesome 15
 	output eDP-1
 	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-alt.conf
 	status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
 	colors {
 		background #222222
 		separator #757575
-		#                  border                 background         	 text
+		#                  border                 background          	 text
 		focused_workspace  $bg-color              $bg-color              $gr-text-color
-		active_workspace   $bg-color	          $bg-color		 $gr-text-color
+		active_workspace   $bg-color	            $bg-color		           $gr-text-color
 		inactive_workspace $inactive-bg-color     $inactive-bg-color     $gr-inactive-text-color
 		urgent_workspace   $inactive-bg-color     $inactive-bg-color     $urgent-color
 		binding_mode       $binding-mode-color    $binding-mode-color    $gr-text-color
@@ -310,17 +310,17 @@ bar {
 # Second monitor (HDMI-1-1) - empty, slightly smaller font
 bar {
 	tray_output none
-	font pango:System San Francisco Display 11
+	font pango:System San Francisco Display, FontAwesome 11
 	output HDMI-1-1
 	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-HDMI-alt.conf
 	status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-HDMI.conf
 	colors {
 		background #222222
 		separator #757575
-		#                  border                 background         	 text
-		focused_workspace  $bg-color              $bg-color          	 $gr-text-color
-		active_workspace   $bg-color	          $bg-color		 $gr-text-color
-		inactive_workspace $inactive-bg-color     $inactive-bg-color 	 $gr-inactive-text-color
+		#                  border                 background          	 text
+		focused_workspace  $bg-color              $bg-color           	 $gr-text-color
+		active_workspace   $bg-color	            $bg-color	          	 $gr-text-color
+		inactive_workspace $inactive-bg-color     $inactive-bg-color 	   $gr-inactive-text-color
 		urgent_workspace   $inactive-bg-color     $inactive-bg-color     $urgent-color
 		binding_mode       $binding-mode-color    $binding-mode-color    $gr-text-color
 	}
