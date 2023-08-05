@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+print=$(ddcutil getvcp 10 -d 1 | awk '{print $9}' | tr -d ',')
+echo "$print% "

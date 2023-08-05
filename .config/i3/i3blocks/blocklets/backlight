@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+current=$(brightnessctl g)
+max=$(brightnessctl m)
+percantage=$(python -c "from math import ceil; print ceil($current.0/$max    *100)" | cut -d. -f1)
+echo "$percantage%"

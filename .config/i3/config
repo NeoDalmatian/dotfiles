@@ -166,7 +166,7 @@ bindsym Print exec --no-startup-id gnome-screenshot -i
 # Open calculator by pressing fn+f12
 bindsym XF86Calculator exec --no-startup-id gnome-calculator
 
-# Main monitor brightness constol (scaling)
+# Main monitor brightness control (scaling)
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl --quiet set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl --quiet set 5%-
 
@@ -290,7 +290,7 @@ hide_edge_borders both
 # Main monitor (eDp-1) - everything, slightly larger font
 bar {
 	tray_output eDP-1
-	font pango:System San Francisco Display, FontAwesome 15
+	font pango:System San Francisco Display, FontAwesome 16
 	output eDP-1
 	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-alt.conf
 	status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
