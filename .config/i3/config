@@ -22,11 +22,10 @@ exec --no-startup-id nm-applet
 exec --no-startup-id xset -dpms
 exec --no-startup-id xset s off
 
-# Dual monitor setup using Arandr (cat saved file and copy it here) sleep 0.5 because refreshing fixes black screen on laptop
-# Main monitor is eDP-1 (laptop monitor)
-exec --no-startup-id sleep 0.5 && xrandr --output eDP-1 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
-# Main monitor is HDMI-1-1 (second monitor)
-#exec --no-startup-id sleep 1 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
+# Dual monitor setup using Arandr (cat saved file and copy it here) sleep 0.5 and 0.6 because refreshing fixes black screen on laptop
+# Main monitor is switching between eDP-1 and eDP-2 for some reason, so i have set it up so it executes both commands with eDP-1 and eDP-2(one that is disconnected will only return error and one connected will work) (laptop monitor)
+exec --no-startup-id sleep 0.5 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
+exec --no-startup-id sleep 0.6 && xrandr --output eDP-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
 
 # Background wallpaper (sleep 1 sec because of bugs)
 exec --no-startup-id sleep 1 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro-alt.jpg
@@ -40,15 +39,15 @@ exec --no-startup-id picom --experimental-backends
 
 # Save the current window layout of a single workspace, where N is the number of the preferred workspace.
 # This will save the current layout of workspace N to the file.
-# $ i3-save-tree --workspace N > ~/.config/i3/workspace_N.json
+# $ i3-save-tree --workspace N > ~/.config/i3/layouts/workspace_N.json
 
 # Edit newly created file.
-# $ sed -i 's|^\(\s*\)// "|\1"|g; /^\s*\/\//d' ~/.config/i3/workspace_N.json
+# $ sed -i 's|^\(\s*\)// "|\1"|g; /^\s*\/\//d' ~/.config/i3/layouts/workspace_N.json
 
 # Restore the window layout of the workspace
 # vim load_layout.sh
 # #!/bin/sh
-# i3-msg "workspace M; append_layout ~/.config/i3/workspace_N.json"
+# i3-msg "workspace M; append_layout ~/.config/i3/layouts/workspace_N.json"
 
 # Start main (1) workspace layout on startup
 exec --no-startup-id sleep 1.5 && ~/.config/i3/layouts/load_layout_2.sh
@@ -180,6 +179,10 @@ bindsym $mod+x exec --no-startup-id ~/.config/i3/layouts/load_layout_5.sh
 # Open window (transparent "empty" window)
 bindsym $mod+m exec --no-startup-id i3-msg open
 
+# Define names for default main monitor
+set $main eDP-1
+set $main_alt eDP-2
+
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
 set $ws1 "1"
@@ -219,11 +222,11 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # Assign diferent workspaces to diferent screens
 # eDP-1 -> main monitor | HDMI-1-1 -> second monitor
-workspace 1 output eDP-1
-workspace 2 output eDP-1
-workspace 3 output eDP-1
-workspace 4 output eDP-1
-workspace 5 output eDP-1
+workspace 1 output eDP-1 eDP-2
+workspace 2 output eDP-1 eDP-2
+workspace 3 output eDP-1 eDP-2
+workspace 4 output eDP-1 eDP-2
+workspace 5 output eDP-1 eDP-2
 workspace 6 output HDMI-1-1
 workspace 7 output HDMI-1-1
 workspace 8 output HDMI-1-1 
@@ -289,9 +292,11 @@ hide_edge_borders both
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 # Main monitor (eDp-1) - everything, slightly larger font
 bar {
-	tray_output eDP-1
+	tray_output $main
+	tray_output $main_alt
 	font pango:System San Francisco Display, FontAwesome 16
-	output eDP-1
+	output $main
+	output $main_alt
 	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-alt.conf
 	status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
 	colors {
