@@ -24,8 +24,11 @@ exec --no-startup-id xset s off
 
 # Dual monitor setup using Arandr (cat saved file and copy it here) sleep 0.5 and 0.6 because refreshing fixes black screen on laptop
 # Main monitor is switching between eDP-1 and eDP-2 for some reason, so i have set it up so it executes both commands with eDP-1 and eDP-2(one that is disconnected will only return error and one connected will work) (laptop monitor)
-exec --no-startup-id sleep 0.5 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
-exec --no-startup-id sleep 0.6 && xrandr --output eDP-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
+#exec --no-startup-id sleep 0.5 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
+#exec --no-startup-id sleep 0.6 && xrandr --output eDP-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
+
+exec --no-startup-id sleep 0.5 && xrandr --output eDP-2 --primary --mode 1600x900 --pos 1920x180 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
+exec --no-startup-id sleep 0.6 && xrandr --output eDP-1 --mode 1600x900 --pos 1920x180 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
 
 # Background wallpaper (sleep 1 sec because of bugs)
 exec --no-startup-id sleep 1 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro-alt.jpg
@@ -52,12 +55,17 @@ exec --no-startup-id picom --experimental-backends
 # Start main (1) workspace layout on startup
 exec --no-startup-id sleep 1.5 && ~/.config/i3/layouts/load_layout_2.sh
 
-# Start google-chrome on workspace 6 on startup
-exec --no-startup-id sleep 2 && i3-msg "workspace 6; exec --no-startup-id google-chrome-stable"
+# Start firefox on workspace 6 on startup
+exec --no-startup-id sleep 2 && i3-msg "workspace 6; exec --no-startup-id firefox"
 
 # Start conky on main monitor (clock below penguin)
 assign [class="conky"] workspace 1
 exec --no-startup-id sleep 2.5 && conky
+
+# Keyboard layout us
+#exec --no-startup-id sleep 3 && setxkbmap -layout us
+# Keyboard layout hr us (alt + key)
+exec --no-startup-id sleep 3 && setxkbmap hr us
 
 # Gaps (for this i3 version you have to install i3gaps)
 gaps inner 14
@@ -92,7 +100,7 @@ bindsym $mod+Return exec --no-startup-id WINIT_X11_SCALE_FACTOR=1.5 alacritty
 bindsym $mod+shift+q kill
 
 # Start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
+bindsym $mod+n exec --no-startup-id dmenu_run
 
 # A more modern dmenu replacement is rofi:
 bindcode $mod+40 exec --no-startup-id "rofi -modi drun,run -show drun"
@@ -101,10 +109,10 @@ bindcode $mod+40 exec --no-startup-id "rofi -modi drun,run -show drun"
 #bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # Change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+#bindsym $mod+h focus left
+#bindsym $mod+j focus down
+#bindsym $mod+k focus up
+#bindsym $mod+l focus right
 
 # Alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -113,10 +121,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # Move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+#bindsym $mod+Shift+h move left
+#bindsym $mod+Shift+j move down
+#bindsym $mod+Shift+k move up
+#bindsym $mod+Shift+l move right
 
 # Alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -131,7 +139,7 @@ bindsym $mod+Shift+Right move right
 #bindsym $mod+v split v
 
 # Split toggle
-bindsym $mod+y split toggle
+bindsym $mod+z split toggle
 
 # Enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -156,8 +164,8 @@ bindsym $mod+Shift+a focus parent kill
 # Focus the child container
 #bindsym $mod+d focus child
 
-# Open google-chrome
-bindsym $mod+c exec --no-startup-id google-chrome-stable
+# Open firefox
+bindsym $mod+c exec --no-startup-id firefox
 
 # Open interactive screenshot by pressing printscreen
 bindsym Print exec --no-startup-id gnome-screenshot -i
@@ -179,9 +187,11 @@ bindsym $mod+x exec --no-startup-id ~/.config/i3/layouts/load_layout_5.sh
 # Open window (transparent "empty" window)
 bindsym $mod+m exec --no-startup-id i3-msg open
 
-# Define names for default main monitor
-set $main eDP-1
-set $main_alt eDP-2
+# Lock screen
+bindsym $mod+Shift+l exec --no-startup-id i3lock -c 000000
+
+# Bitwarden (vault)
+bindsym $mod+v exec --no-startup-id ~/Bitwarden-2024.1.0-x86_64.AppImage
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -292,11 +302,11 @@ hide_edge_borders both
 # Start i3bar to display a workspace bar (plus the system information i3status finds out, if available)
 # Main monitor (eDp-1) - everything, slightly larger font
 bar {
-	tray_output $main
-	tray_output $main_alt
+	tray_output eDP-1
+	tray_output eDP-2
 	font pango:System San Francisco Display, FontAwesome 16
-	output $main
-	output $main_alt
+	output eDP-1
+	output eDP-2
 	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-alt.conf
 	status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks.conf
 	colors {
