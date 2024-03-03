@@ -356,3 +356,13 @@ mode "Exit (L)ogout, (R)eboot, (P)oweroff" {
 }
 
 bindsym $mod+Shift+e mode "Exit (L)ogout, (R)eboot, (P)oweroff"
+
+# Scratchpad (hide window)
+# To remove window from scratchpad just make it tiling ($mod+shift+space)
+# Move targeted window to scratchpad workspace (hide)
+bindsym $mod+shift+z move scratchpad
+# Show first window in scratchpad workspace / toggle visibility / switch between hidden windows (show)
+bindsym $mod+shift+x scratchpad show
+
+# Focus follows mouse (disable)
+focus_follows_mouse no
