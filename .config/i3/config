@@ -191,7 +191,7 @@ bindsym $mod+m exec --no-startup-id i3-msg open
 bindsym $mod+Shift+l exec --no-startup-id i3lock -c 000000
 
 # Bitwarden (vault)
-bindsym $mod+v exec --no-startup-id ~/Bitwarden-2024.1.0-x86_64.AppImage
+bindsym $mod+v exec --no-startup-id ~/Bitwarden-2024.2.0-x86_64.AppImage
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
