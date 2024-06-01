@@ -27,8 +27,8 @@ exec --no-startup-id xset s off
 #exec --no-startup-id sleep 0.5 && xrandr --output eDP-1 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
 #exec --no-startup-id sleep 0.6 && xrandr --output eDP-2 --mode 1920x1080 --pos 1920x0 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
 
-exec --no-startup-id sleep 0.5 && xrandr --output eDP-2 --primary --mode 1600x900 --pos 1920x180 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
-exec --no-startup-id sleep 0.6 && xrandr --output eDP-1 --mode 1600x900 --pos 1920x180 --rotate normal --output HDMI-1-1 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
+exec --no-startup-id sleep 0.5 && xrandr --output eDP-2 --primary --mode 1600x900 --pos 1920x180 --rotate normal --output HDMI-1-0 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-1 --off
+exec --no-startup-id sleep 0.6 && xrandr --output eDP-1 --mode 1600x900 --pos 1920x180 --rotate normal --output HDMI-1-0 --mode 1920x1080 --pos 0x0 --rotate normal --output eDP-1-2 --off
 
 # Background wallpaper (sleep 1 sec because of bugs)
 exec --no-startup-id sleep 1 && feh --bg-scale ~/Pictures/Wallpapers/linux-retro-alt.jpg
@@ -177,9 +177,18 @@ bindsym XF86Calculator exec --no-startup-id gnome-calculator
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl --quiet set +5%
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl --quiet set 5%-
 
-# Second monitor brightness control (toggle 0% - 30%)
-bindsym $mod+i exec --no-startup-id ddcutil --display 1 setvcp 10 0 --sleep-multiplier 0.1
-bindsym $mod+o exec --no-startup-id ddcutil --display 1 setvcp 10 30 --sleep-multiplier 0.1
+# Second monitor brightness control (toggle 0% - 30%) (ddcutil)
+#bindsym $mod+i exec --no-startup-id ddcutil --display 1 setvcp 10 0 --sleep-multiplier 0.1
+#bindsym $mod+o exec --no-startup-id ddcutil --display 1 setvcp 10 30 --sleep-multiplier 0.1
+
+# Second monitor brightness control (toggle 70% - 98%) (xrandr)
+#bindsym $mod+i exec --no-startup-id xrandr --output HDMI-1-0 --brightness 0.7
+#bindsym $mod+o exec --no-startup-id xrandr --output HDMI-1-0 --brightness 0.98
+
+# Second monitor brightness control (scaling) (custom scrpt using xrands) (better than ddcutil, no lag)
+bindsym $mod+i exec --no-startup-id ~/.config/i3/scripts/bright -
+bindsym $mod+o exec --no-startup-id ~/.config/i3/scripts/bright +
+
 
 # Open layout for coding
 bindsym $mod+x exec --no-startup-id ~/.config/i3/layouts/load_layout_5.sh
@@ -237,11 +246,11 @@ workspace 2 output eDP-1 eDP-2
 workspace 3 output eDP-1 eDP-2
 workspace 4 output eDP-1 eDP-2
 workspace 5 output eDP-1 eDP-2
-workspace 6 output HDMI-1-1
-workspace 7 output HDMI-1-1
-workspace 8 output HDMI-1-1 
-workspace 9 output HDMI-1-1
-workspace 10 output HDMI-1-1
+workspace 6 output HDMI-1-0
+workspace 7 output HDMI-1-0
+workspace 8 output HDMI-1-0 
+workspace 9 output HDMI-1-0
+workspace 10 output HDMI-1-0
 
 # Reload the configuration file
 bindsym $mod+Shift+c reload
@@ -322,11 +331,11 @@ bar {
 	}
 }
 
-# Second monitor (HDMI-1-1) - empty, slightly smaller font
+# Second monitor (HDMI-1-0) - empty, slightly smaller font
 bar {
 	tray_output none
 	font pango:System San Francisco Display, FontAwesome 11
-	output HDMI-1-1
+	output HDMI-1-0
 	#status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-alt/i3blocks-HDMI-alt.conf
 	status_command i3blocks -c ~/.config/i3/i3blocks/i3blocks-HDMI.conf
 	colors {
@@ -364,5 +373,5 @@ bindsym $mod+shift+z move scratchpad
 # Show first window in scratchpad workspace / toggle visibility / switch between hidden windows (show)
 bindsym $mod+shift+x scratchpad show
 
-# Focus follows mouse (disable)
+# Focus follows mouse (disable) (diable focusing on vindows by having mouse on it - you have to click to focus)
 focus_follows_mouse no

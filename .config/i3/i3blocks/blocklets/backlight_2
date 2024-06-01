@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Run the bright script and capture its output
+output=$(~/.config/i3/scripts/bright)
+
+# Extract the brightness value using awk
+brightness=$(echo $output | awk '{print $NF}')
+
+# Convert the brightness value to a percentage
+percentage=$(echo "$brightness * 100 / 1" | bc)
+
+# Print the result with a '%' sign
+echo "${percentage}%"
+
